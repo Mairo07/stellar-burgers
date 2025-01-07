@@ -13,7 +13,7 @@ type TCreateOrderState = {
   error: string | null;
 };
 
-const initialState: TCreateOrderState = {
+export const initialState: TCreateOrderState = {
   order: null,
   orderRequest: false,
   error: null

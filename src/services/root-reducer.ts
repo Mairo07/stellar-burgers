@@ -2,21 +2,21 @@ import { combineReducers } from '@reduxjs/toolkit';
 import {
   ingredientsSliceName,
   ingredientsSliceReducer
-} from './slices/ingredientsSlice';
+} from './slices/ingredients-slice';
 import {
   burgerContructorSliceName,
   burgerContructorSliceReducer
-} from './slices/burgerConstructorSlice';
-import { feedsSliceName, feedsSliceReducer } from './slices/feedsSlice';
-import { authSliceName, authSliceReducer } from './slices/authSlice';
+} from './slices/burger-constructor-slice';
+import { feedsSliceName, feedsSliceReducer } from './slices/feeds-slice';
+import { authSliceName, authSliceReducer } from './slices/auth-slice';
 import {
   userOrdersSliceName,
   userOrdersSliceReducer
-} from './slices/userOrdersSlice';
+} from './slices/user-orders-slice';
 import {
   createOrderSliceName,
   createOrderSliceReducer
-} from './slices/createOrderSlice';
+} from './slices/create-order-slice';
 
 export const rootReducer = combineReducers({
   [burgerContructorSliceName]: burgerContructorSliceReducer,

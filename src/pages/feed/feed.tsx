@@ -8,7 +8,7 @@ import {
   feedsErrorSelector,
   feedsLoadingSelector,
   feedsOrdersSelector
-} from '../../services/slices/feedsSlice';
+} from '../../services/slices/feeds-slice';
 
 export const Feed: FC = () => {
   const orders: TOrder[] = useSelector(feedsOrdersSelector);

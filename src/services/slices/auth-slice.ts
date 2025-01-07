@@ -11,11 +11,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 
-type TError = {
-  message: string;
-  success: boolean;
-};
-
 export const loginUserThunk = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }: TLoginData, { rejectWithValue }) => {
@@ -88,7 +83,7 @@ type TAuthState = {
   logoutUserError: string | null;
 };
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   userData: null,
   isAuthChecked: false,
   isAuthenticated: false,
