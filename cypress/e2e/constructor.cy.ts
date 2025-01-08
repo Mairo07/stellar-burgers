@@ -1,3 +1,6 @@
+const BURGER_CONSTRUCTOR_SELECTOR = '[data-cy="burger-constructor"]';
+const MODAL_SELECTOR = '#modals';
+
 beforeEach(() => {
   cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' }).as(
     'ingredients'
@@ -5,7 +8,7 @@ beforeEach(() => {
   cy.intercept('GET', 'api/auth/user', { fixture: 'user.json' }).as('user');
   cy.setCookie('accessToken', 'mockAccessToken');
   localStorage.setItem('refreshToken', 'mockrRefreshToken');
-  cy.visit('http://localhost:4000');
+  cy.visit('/');
   cy.wait(['@ingredients', '@user']);
 });
 
@@ -16,7 +19,7 @@ afterEach(() => {
 
 describe('Конструктор бургера', () => {
   it('Добавляется булка', () => {
-    cy.get('[data-cy="burger-constructor"]').should(
+    cy.get(BURGER_CONSTRUCTOR_SELECTOR).should(
       'not.contain.text',
       'Краторная булка N-200i'
     );
@@ -29,14 +32,14 @@ describe('Конструктор бургера', () => {
 
     button.click();
 
-    cy.get('[data-cy="burger-constructor"]').should(
+    cy.get(BURGER_CONSTRUCTOR_SELECTOR).should(
       'contain.text',
       'Краторная булка N-200i'
     );
   });
 
   it('Добавляетя начинка', () => {
-    cy.get('[data-cy="burger-constructor"]').should(
+    cy.get(BURGER_CONSTRUCTOR_SELECTOR).should(
       'not.contain.text',
       'Говяжий метеорит (отбивная)'
     );
@@ -49,7 +52,7 @@ describe('Конструктор бургера', () => {
 
     button.click();
 
-    cy.get('[data-cy="burger-constructor"]').should(
+    cy.get(BURGER_CONSTRUCTOR_SELECTOR).should(
       'contain.text',
       'Говяжий метеорит (отбивная)'
     );
@@ -58,7 +61,7 @@ describe('Конструктор бургера', () => {
 
 describe('Модальное окно', () => {
   it('Открывается модальное окно ингредиента', () => {
-    const modal = cy.get('#modals');
+    const modal = cy.get(MODAL_SELECTOR);
 
     modal.should('be.empty');
 
@@ -76,25 +79,25 @@ describe('Модальное окно', () => {
     });
 
     it('закрывается по клику на крестик', () => {
-      const modal = cy.get('#modals');
+      const modal = cy.get(MODAL_SELECTOR);
       modal.should('not.be.empty');
 
       const button = modal.find('button');
       button.click();
 
       modal.should('not.exist');
-      cy.get('#modals').should('be.empty');
+      cy.get(MODAL_SELECTOR).should('be.empty');
     });
 
     it('закрывается по клику на оверлей', () => {
-      const modal = cy.get('#modals');
+      const modal = cy.get(MODAL_SELECTOR);
       modal.should('not.be.empty');
 
       const overlay = modal.children().last();
       overlay.click('top', { force: true });
 
       modal.should('not.exist');
-      cy.get('#modals').should('be.empty');
+      cy.get(MODAL_SELECTOR).should('be.empty');
     });
   });
 });
@@ -123,7 +126,7 @@ describe('Создание заказа', () => {
   });
 
   it('Собирается бургер', () => {
-    const burgerConstructor = cy.get('[data-cy="burger-constructor"]');
+    const burgerConstructor = cy.get(BURGER_CONSTRUCTOR_SELECTOR);
     burgerConstructor.should('contain.text', 'Флюоресцентная булка R2-D3');
     burgerConstructor.should('contain.text', 'Соус фирменный Space Sauce');
     burgerConstructor.should('contain.text', 'Говяжий метеорит (отбивная)');
@@ -133,10 +136,10 @@ describe('Создание заказа', () => {
   });
 
   it('При клике на кнопку "Оформить заказ" вызывается модальное окно с верным номером заказа', () => {
-    const modal = cy.get('#modals');
+    const modal = cy.get(MODAL_SELECTOR);
     modal.should('be.empty');
 
-    cy.get('[data-cy="burger-constructor"]').contains('Оформить заказ').click();
+    cy.get(BURGER_CONSTRUCTOR_SELECTOR).contains('Оформить заказ').click();
     cy.wait('@order');
 
     modal.should('not.be.empty');
@@ -144,18 +147,18 @@ describe('Создание заказа', () => {
   });
 
   it('Закрывается модальное окно. После закрытия окна конструктор бургера пуст.', () => {
-    cy.get('[data-cy="burger-constructor"]').contains('Оформить заказ').click();
+    cy.get(BURGER_CONSTRUCTOR_SELECTOR).contains('Оформить заказ').click();
     cy.wait('@order');
-    const modal = cy.get('#modals');
+    const modal = cy.get(MODAL_SELECTOR);
     modal.should('not.be.empty');
 
     const button = modal.find('button');
     button.click();
 
     modal.should('not.exist');
-    cy.get('#modals').should('be.empty');
+    cy.get(MODAL_SELECTOR).should('be.empty');
 
-    const burgerConstructor = cy.get('[data-cy="burger-constructor"]');
+    const burgerConstructor = cy.get(BURGER_CONSTRUCTOR_SELECTOR);
     burgerConstructor.should('contain.text', 'Выберите булки');
     burgerConstructor.should('contain.text', 'Выберите начинку');
   });
