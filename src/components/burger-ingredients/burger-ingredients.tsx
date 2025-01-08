@@ -6,7 +6,7 @@ import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import {
   getIngredientsErrorSelector,
   getIngredientsSelector
-} from '../../services/slices/ingredientsSlice';
+} from '../../services/slices/ingredients-slice';
 import { useSelector } from '../../services/store';
 
 export const BurgerIngredients: FC = () => {

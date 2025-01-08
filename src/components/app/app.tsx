@@ -18,15 +18,14 @@ import {
   Routes,
   useLocation,
   useMatch,
-  useNavigate,
-  useParams
+  useNavigate
 } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
-import { FC, useEffect } from 'react';
-import { getIngredients } from '../../services/slices/ingredientsSlice';
+import { useEffect } from 'react';
+import { getIngredients } from '../../services/slices/ingredients-slice';
 import clsx from 'clsx';
-import { ProtectedRoute } from '../protectedRoute/ProtectedRoute';
-import { getUserThunk } from '../../services/slices/authSlice';
+import { getUserThunk } from '../../services/slices/auth-slice';
+import { ProtectedRoute } from '../protected-route/protected-route';
 
 const App = () => {
   const location = useLocation();

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   registerUserErrorSelector,
   registerUserThunk
-} from '../../services/slices/authSlice';
+} from '../../services/slices/auth-slice';
 
 export const Register: FC = () => {
   const registerError = useSelector(registerUserErrorSelector);

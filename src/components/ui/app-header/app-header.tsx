@@ -42,6 +42,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           className={({ isActive }) =>
             clsx(styles.link, isActive && styles.link_active)
           }
+          data-cy='profile'
         >
           <ProfileIcon type={'primary'} />
           <p className='text text_type_main-default ml-2'>

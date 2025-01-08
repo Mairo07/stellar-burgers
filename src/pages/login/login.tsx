@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   loginUserErrorSelector,
   loginUserThunk
-} from '../../services/slices/authSlice';
+} from '../../services/slices/auth-slice';
 
 export const Login: FC = () => {
   const loginError = useSelector(loginUserErrorSelector);
